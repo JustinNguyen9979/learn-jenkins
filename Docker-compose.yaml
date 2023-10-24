@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  database-mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      - MYSQL_DATABASE=justin
+      - MYSQL_ROOT_PASSWORD=123456
+    ports:
+      - '3307:3306'
+    expose: #Mở port mới là 3306 để image khác có thể kết nối vào được
+      - 3306
+    networks:
+      - jenkins_network
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      - DB_PORT=3306 #Kết nối vào port 3306 của database-mysql
+      - DB_HOST=database-mysql #Gọi tên của service database-mysql để backend và database-mysql có thể nc với nhau
+      # - DB_HOST=host.docker.internal #Đường dẫn localhost
+    ports:
+      - 3000:3000
+    networks:
+      - jenkins_network
+networks:
+  jenkins_network:
+    name: jenkins_network
