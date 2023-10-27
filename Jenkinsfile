@@ -18,9 +18,7 @@ pipeline {
         
         stage("SSH Agent") {
             steps {
-                sshagent(['SSH-Agent-Remote-Justin']) {
-                    sh 'ssh -o StrictHostKeyChecking=no -l justin 192.168.1.112 touch /home/justin/test-ssh.txt'
-                }
+                sshPublisher(publishers: [sshPublisherDesc(configName: 'SSH-Remote-Justin', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'cp app.js app-test.js', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'app.js')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
         }
     }
