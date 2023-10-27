@@ -6,14 +6,22 @@ pipeline {
                 git 'https://github.com/JustinNguyen9979/learn-jenkins.git'
             }
         }
-        stage('Build') {
+        // stage('Build') {
+        //     steps {
+        //         withDockerRegistry(credentialsId: 'Docker-Hub', url: 'https://index.docker.io/v1/') {
+        //             sh 'docker build -t 997909799/learn-jenkins:V1.01 .'
+        //             sh 'docker push 997909799/learn-jenkins:V1.01'
+        //         }
+        //     }
+
+        // }
+        
+        stage("SSH Agent") {
             steps {
-                withDockerRegistry(credentialsId: 'Docker-Hub', url: 'https://index.docker.io/v1/') {
-                    sh 'docker build -t 997909799/learn-jenkins:V1.01 .'
-                    sh 'docker push 997909799/learn-jenkins:V1.01'
+                sshagent(['SSH-Agent-Remote']) {
+                    sh 'ssh -o StrictHostKeyChecking=no -l root 192.168.1.112 touch /home/justin/test-ssh.txt'
                 }
             }
-
         }
     }
 }
