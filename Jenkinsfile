@@ -18,8 +18,8 @@ pipeline {
         
         stage("SSH Agent") {
             steps {
-                sshagent(['SSH-Agent-Remote']) {
-                    sh 'ssh -o StrictHostKeyChecking=no -l root 192.168.1.112 touch /home/justin/test-ssh.txt'
+                sshagent(['SSH-Agent-Remote-Justin']) {
+                    sh 'ssh -o StrictHostKeyChecking=no -l justin 192.168.1.112 touch /home/justin/test-ssh.txt'
                 }
             }
         }
