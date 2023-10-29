@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                withDockerRegistry(credentialsId: 'Docker-Hub', url: 'https://index.docker.io/v1/') {
+                withDockerRegistry(credentialsId: 'Docker-Hub-Username', url: 'https://index.docker.io/v1/') {
                     sh 'docker build -t 997909799/learn-jenkins:V1.01 .'
                     sh 'docker push 997909799/learn-jenkins:V1.01'
                 }
