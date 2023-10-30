@@ -22,9 +22,9 @@ pipeline {
             }
         }
     }
-    post {
-        always {
-            mail bcc: '', body: 'Justin Learn Jenkins', cc: '', from: '', replyTo: '', subject: 'Learn Jenkins', to: 'duchuy_1997@hotmail.com'
-        }
-    }
+    // post {
+    //     always {
+    //         mail bcc: '', body: 'Justin Learn Jenkins', cc: '', from: '', replyTo: '', subject: 'Learn Jenkins', to: 'duchuy_1997@hotmail.com'
+    //     }
+    // }
 }
