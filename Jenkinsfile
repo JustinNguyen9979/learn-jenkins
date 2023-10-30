@@ -17,11 +17,11 @@ pipeline {
 
         }
 
-        stage('Cleanup Docker Images') {
-            steps {
-                sh "docker rmi 997909799/learn-jenkins:V1.01"
-                sh "docker rmi node:14"
-            }
-        }
+        // stage('Cleanup Docker Images') {
+        //     steps {
+        //         sh "docker rmi 997909799/learn-jenkins:V1.01"
+        //         sh "docker rmi node:14"
+        //     }
+        // }
     }
 }
