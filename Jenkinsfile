@@ -17,18 +17,16 @@ pipeline {
 
         }
 
-        // stage("SSH Agent") {
-        //     steps {
-        //         sshagent(['SSH-Agent-Remote-Justin']) {
-        //             sh 'ssh -o StrictHostKeyChecking=no -l justin 192.168.1.112 touch demo-jenkins.txt'
-        //         }
-        //     }
-        // }
-        
-        // stage("SSH Agent") {
-        //     steps {
-        //         sshPublisher(publishers: [sshPublisherDesc(configName: 'SSH-Remote-Justin', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'cp app.js app-test.js', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'app.js')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
-        //     }
-        // }
+        stage('Cleanup Docker Images') {
+            steps {
+                // Xóa toàn bộ images
+                script {
+                    def imagesToDelete = sh(script: 'docker images -q my-docker-image', returnStatus: true).trim()
+                    if (imagesToDelete) {
+                        sh "docker rmi $imagesToDelete"
+                    }
+                }
+            }
+        }
     }
 }
