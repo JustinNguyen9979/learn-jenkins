@@ -19,13 +19,7 @@ pipeline {
 
         stage('Cleanup Docker Images') {
             steps {
-                // Xóa toàn bộ images
-                script {
-                    def imagesToDelete = sh(script: 'docker images -q 997909799/learn-jenkins:V1.01', returnStatus: true).trim()
-                    if (imagesToDelete) {
-                        sh "docker rmi $imagesToDelete"
-                    }
-                }
+                sh "docker rmi 997909799/learn-jenkins:V1.01"
             }
         }
     }
